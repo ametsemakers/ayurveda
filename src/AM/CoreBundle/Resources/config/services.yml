@@ -1,0 +1,9 @@
+services:
+    am_core.amSendMail:
+        class: AMCoreBundle\SendMail\AMSendMail
+#        arguments: ["@service_id", "plain_value", "%parameter%"]
+
+    twig.extension.text:
+      class: Twig_Extensions_Extension_Text
+      tags:
+        - { name: twig.extension }

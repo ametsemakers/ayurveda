@@ -1,0 +1,78 @@
+{% extends "@AMAdmin/layout.html.twig" %}
+
+{% block body %}
+{{ dump(article) }}
+{{ dump(form) }}
+
+<div class="well">
+  {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+  {# Les erreurs générales du formulaire. #}
+  {{ form_errors(form) }}
+
+  {# Génération du label + error + widget pour un champ. #}
+  {#{ form_row(form.date) }#}
+
+  {# Génération manuelle et éclatée : #}
+  <div class="form-group">
+    {# Génération du label. #}
+    {{ form_label(form.title, "Titre de l'article", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+
+    {# Affichage des erreurs pour ce champ précis. #}
+    {{ form_errors(form.title) }}
+
+    
+      {# Génération de l'input. #}
+      {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+    
+  </div>
+
+  {# Idem pour un autre champ. #}
+  <div class="form-group">
+    {{ form_label(form.content, "Contenu de l'article", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+    {{ form_errors(form.content) }}
+    
+      {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+    
+  </div>
+    <div class="form-group">
+  {{ form_label(form.author, "Auteur", {'label_attr': {'class': 'col-sm-2 cotrol-label'}}) }}
+    {{ form_errors(form.author) }}
+    {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="well">
+        {{ form_row(form.images)}}
+        <a href="#" id="add_image" class="btn btn-default">Ajouter une image</a>
+    
+  </div>
+  <div class="well">
+        {{ form_row(form.categories)}}
+        <a href="#" id="add_category" class="btn btn-default">Ajouter une catégorie</a>
+    
+  </div>
+  {{ form_row(form.published) }}
+
+    
+
+  {# Pour le bouton, pas de label ni d'erreur, on affiche juste le widget #}
+  {#{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }#}
+
+    <div class="form-group">
+                        
+        <button type="submit" class="btn btn-primary mt4">
+            Enregistrer
+        </button>
+        <a href="{{ path('am_admin_home', {'page': 1}) }}" class="btn btn-warning">Annuler</a>        
+    </div>
+
+
+  {# Génération automatique des champs pas encore écrits.
+     Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+     et tous les champs cachés (type « hidden »). #}
+  {{ form_rest(form) }}
+
+  {# Fermeture de la balise <form> du formulaire HTML #}
+  {{ form_end(form) }}
+</div>
+
+{% endblock %}

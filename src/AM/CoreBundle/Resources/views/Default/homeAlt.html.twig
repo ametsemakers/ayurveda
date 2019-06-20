@@ -1,0 +1,140 @@
+{% extends "@AMCore/layout.html.twig" %}
+
+{% block additional_style %}
+    <link href="https://fonts.googleapis.com/css?family=Neucha" rel="stylesheet">
+{% endblock %}
+
+{% block title %} - Home{% endblock %}
+
+    
+{% block core_body %}
+
+<div class="row" id="background-home">
+    <div class="col col-md-4 offset-md-1 text-center">
+        <img src="{{ asset('images/logo-alternative.jpg') }}"
+            alt="logo"
+            id="logo-home"
+        /> 
+    </div>
+    <div id="separation-line">
+        </div>
+    <div class="col col-md-6 text-center">
+        <p id="intro-home">
+            Massages traditionnels et<br />
+            alimentation suivant<br />
+            l'Ayurveda.
+        </p>
+    </div>
+</div>
+
+{# row vide / fond blanc #}
+<div class="row" id="second-row-home">
+</div>
+
+{# row border #}
+<div>
+    <div id="border-blue-home">
+    </div>
+    <div id="border-safran-home">
+    </div>
+</div>
+
+{#  #}
+<div class="row">
+    <div class="col col-md-6">
+        <div class="row" id="home-list">
+            <div class="col col-md-12">
+                <div class="row">
+                    <div class="col col-md-2 text-center">
+                        <img src="{{ asset('images/goute.png') }}"
+                            alt="goute"
+                            class="drop-icon"
+                        /> 
+                    </div>
+                    <div class="col col-md-10">
+                        Douleurs articulaires
+                    </div>
+                </div>
+            </div>
+            <div class="col col-md-12">
+                <div class="row">
+                    <div class="col col-md-2 text-center">
+                        <img src="{{ asset('images/goute.png') }}"
+                            alt="goute"
+                            class="drop-icon"
+                        /> 
+                    </div>
+                    <div class="col col-md-10">
+                        Insomnies
+                    </div>
+                </div>
+            </div>
+            <div class="col col-md-12">
+                <div class="row">
+                    <div class="col col-md-2 text-center">
+                        <img src="{{ asset('images/goute.png') }}"
+                            alt="goute"
+                            class="drop-icon"
+                        /> 
+                    </div>
+                    <div class="col col-md-10">
+                        Stress
+                    </div>
+                </div>
+            </div>
+            <div class="col col-md-12">
+                <div class="row">
+                    <div class="col col-md-2 text-center">
+                        <img src="{{ asset('images/goute.png') }}"
+                            alt="goute"
+                            class="drop-icon"
+                        /> 
+                    </div>
+                    <div class="col col-md-10">
+                        Elimination des toxines
+                    </div>
+                </div>
+            </div>
+            <div class="col col-md-12">
+                <div class="row">
+                    <div class="col col-md-2 text-center">
+                        <img src="{{ asset('images/goute.png') }}"
+                            alt="goute"
+                            class="drop-icon"
+                        /> 
+                    </div>
+                    <div class="col col-md-10">
+                        Drainage
+                    </div>
+                </div>
+            </div>
+            <div class="col col-md-12">
+                <div class="row">
+                    <div class="col col-md-2 text-center">
+                        <img src="{{ asset('images/goute.png') }}"
+                            alt="goute"
+                            class="drop-icon"
+                        /> 
+                    </div>
+                    <div class="col col-md-10">
+                        Réequilibration alimentaire
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {#<div class="col col-md-4">
+    </div>#}
+    <div class="col col-md-6">
+        {#<img src="{{ asset('images/india7.jpg') }}"
+            alt="rose"
+            id="img-rose-home"
+            class="rounded-circle"
+        />#}
+        <div class="rounded-circle" id="img-rose-home">
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

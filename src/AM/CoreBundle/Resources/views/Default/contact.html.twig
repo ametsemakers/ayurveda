@@ -1,0 +1,41 @@
+{% extends "@AMCore/layout.html.twig" %}
+
+{% block core_body %}
+<div id="contact-image-container">
+    <img src="{{ asset('images/IMG_5276.jpg') }}"
+        alt="tissue-background"
+        id="contact-image"
+    />
+</div>
+<div id="">
+    <div class="row justify-content-center">
+    <div class="col col-md-8" id="contact-container">
+    
+    <br/>
+    <br/>
+    <h1>Page de Contact</h1>
+        {% for message in app.flashes('notice') %}
+                <div class="jumbotron mt3">
+                    <p>
+                        {{ message }}
+                    </p>
+                </div>
+            {% endfor %}
+    <hr>
+        {{ form_start(form) }}
+            {{ form_errors(form) }}
+            {{ form_row(form.name) }}
+            {{ form_row(form.subject) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.content) }}
+
+    <button type="submit" class="btn btn-primary">
+        Envoyer
+    </button>
+
+        {{ form_rest(form) }}
+        {{ form_end(form) }}
+    </div>
+    </div>
+</div>
+{% endblock %}

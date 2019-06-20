@@ -1,0 +1,28 @@
+*  Template not found
+
+Dans le Controller : return $this->render('@AMAdmin/Default/index.html.twig');
+
+*  (1/1) ClassNotFoundException
+
+   Attempted to load class "OCPlatformBundle" from namespace "OC\PlatformBundle".
+   Did you forget a "use" statement for another namespace?
+
+Petite correction dans composer.json
+
+Remplacez :
+	
+"psr-4": {
+    "AppBundle\\": "src/AppBundle"
+},
+
+Par :
+	
+"psr-4": {
+    "": "src/"
+},
+
+Et concluez la modification par un :
+	
+composer dump-autoload
+
+*

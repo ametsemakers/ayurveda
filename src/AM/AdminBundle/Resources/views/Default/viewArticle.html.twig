@@ -1,0 +1,86 @@
+{% extends "@AMAdmin/layout.html.twig" %}
+
+{% block title %}
+    Article {{ article.id }} - {{ parent() }}
+{% endblock %}
+
+{% block title_header %}
+    - Apercu article
+{% endblock %}
+
+{% block body %}
+
+    {{ dump(article) }}
+    
+
+    <div class="row">
+        <div class="col col-md-12">
+            <h2>{{ article.title }}</h2>
+            <p>{{ article.content }}</p>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col col-md-12">
+            <h5>Images associés</h5>
+        </div>
+
+        {% if article.images is not null %}
+            {% for image in article.images %}
+                <div class="col col-md-3 mt-3">
+                    <img
+                        src="{{ asset(image.getWebPath) }}"
+                        alt="{{ image.alt }}"
+                        width="250px"
+                    />
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <div class="row mt-3">
+        <div class="col col-md-12">
+            <h5>Catégories</h5>
+        </div>
+        <div class="col col-md-12 mt-3"> 
+            <ul>
+                {% if article.categories is not null %}
+                    {% for category in article.categories %}
+                        <li class="viewArticleCategories">{{ category.name }}</li>
+                    {% endfor %}
+                {% endif %}
+            </ul>
+        </div>
+
+        {% if article.position is not null %}
+            
+            <div class="col col-md-12 mt-3">
+                <p>
+                    Placement dans site : {{ article.position.name }}
+                </p>
+            </div>
+            
+        {% endif %}
+
+        <div class="col col-md-12 mt-3">
+            <p>Publié par <strong>{{ article.author }}</strong> le {{ article.date|date('d/m/Y') }}
+                {% if article.updatedAt is not null %}
+                    , modifié le {{ article.updatedAt|date('d/m/Y') }}
+                {% endif %}
+            </p>
+        </div>
+        </div>
+            <div class="row justify-content-between">
+                <div class"col col-md-1" id="viewArticleReturnContainer">
+                    <a href="{{ path('am_admin_home', {'page': 1}) }}" class="btn btn-dark">Retourner</a>
+                </div>
+                <div class="col col-md-3" id="viewArticleChangeContainer">
+                    <a href="{{ path('am_admin_edit', { 'id': article.id }) }}" class="btn btn-outline-secondary">Modifier</a>
+                    <a href="{{ path('am_admin_delete', { 'id': article.id }) }}" class="btn btn-danger">Supprimer</a>
+                </div>
+            </div>
+        
+    
+
+
+
+{% endblock %}

@@ -1,0 +1,31 @@
+// Create Symfony 3.4 project
+
+composer create-project symfony/framework-standard-edition name_project "3.4.*"
+
+// Create Bundle
+
+php bin/console generate:bundle
+
+// Create database
+
+php bin/console doctrine:database:create
+
+// Create object (database table)
+
+php bin/console doctrine:generate:entity
+
+// Verify database and calculate commands to database
+
+php bin/console doctrine:schema:update --dump-sql
+
+// Apply commands to database
+
+php bin/console doctrine:schema:update --force
+
+// Generate getters and setters
+
+php bin/console doctrine:generate:entities AcmeBunde:Entity
+
+// Clear cache
+
+php bin/console cache:clear

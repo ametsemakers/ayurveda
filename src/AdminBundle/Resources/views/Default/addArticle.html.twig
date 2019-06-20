@@ -1,0 +1,297 @@
+{% extends "@AMAdmin/layout.html.twig" %}
+
+{% block title %}
+    Ajouter une article - {{ parent() }}
+{% endblock %}
+
+{% block title_header %}
+    - Ajouter une article
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        {{ dump(form) }}
+        {{ dump(app) }}
+        <div class="well">
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+            {# Les erreurs générales du formulaire. #}
+            {{ form_errors(form) }}
+
+            {# Génération du label + error + widget pour un champ. #}
+            {#{ form_row(form.date) }#}
+
+            {# Génération manuelle et éclatée : #}
+            <div class="form-group">
+                {# Génération du label. #}
+                {{ form_label(form.title, "Titre de l'article :", {'label_attr': {'class': 'control-label'}}) }}
+
+                {# Affichage des erreurs pour ce champ précis. #}
+                {{ form_errors(form.title) }}
+
+    
+                {# Génération de l'input. #}
+                {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.content, "Contenu de l'article :", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_errors(form.content) }}
+                
+                {{ form_widget(form.content, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.author, "Auteur :", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_errors(form.author) }}
+                {{ form_widget(form.author, {'attr': {'class': 'form-control' }}) }}
+            </div>
+
+            <div class="form-group imagesFormAdd">
+                {{ form_label(form.images, "Images :") }}
+                {{ form_errors(form.images) }}
+                {{ form_widget(form.images) }}
+                {#{ form_row(form.images) }#}
+                <a href="#" id="add_image" class="btn btn-outline-info">Ajouter une autre image</a>
+            </div>
+
+            <div class="form-group categoriesFormAdd">
+                {{ form_label(form.categories, "Categories :") }}
+                {{ form_errors(form.categories) }}
+                {{ form_widget(form.categories) }}
+                {#{ form_row(form.categories) }#}
+                <a href="#" id="add_category" class="btn btn-outline-info">Ajouter une catégorie</a>
+            </div>
+
+            <div class="form-group mt-3">
+                {{ form_label(form.position, "Emplacement :", {'label_attr': {'class': 'control-label'}}) }}
+                {{ form_errors(form.position) }}
+                {{ form_widget(form.position, {'attr': {'class': 'form-control'}}) }}
+            </div>
+
+            {{ form_row(form.published) }}
+
+            <div class="form-group mt-4">                
+                <button type="submit" class="btn btn-info">
+                    Enregistrer
+                </button>
+                <a href="{{ path('am_admin_home', {'page': 1}) }}" class="btn btn-warning">
+                    Annuler
+                </a>               
+            </div>
+
+        {{ form_rest(form) }}
+
+        {{ form_end(form) }}
+    </div>
+
+
+
+
+
+
+    {# <div class="row">
+        <div class="col-md-10 col-md-offset-2">
+            <div class="panel panel-default">
+                <div class="panel-heading mt-4">Noveau article</div>
+                <div class="panel-body">
+                    {{ form_start(form) }}
+
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-2 mt-4">
+                            {{ form_row(form.title, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-2">
+                            {{ form_row(form.content, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-2">
+                            {{ form_row(form.author, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-2">
+                            {{ form_row(form.date, {'attr': {'class': 'form-control', 'data-provide': 'datepicker'}}) }}
+                        </div>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-2">
+                            {{ form_row(form.published, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-2">
+                            {{ form_row(form.categories, {'attr': {'class': 'form-control'}}) }}
+                            <a href="#" id="add_category" class="btn btn-default">Ajouter une catégorie</a>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-4" style="margin-top:5px;">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa fa-btn fa-user"></i> Enregistrer
+                            </button>
+                        </div>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div> #}
+</div>
+
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block javascripts %}
+    {{ parent() }}
+    
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+            var $container = $('div#article_categories');
+
+            var $images = $('div#article_images');
+
+            // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+            var index = $container.find(':input').length;
+
+            var indexImages = $images.find(':input').length;
+
+            // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+            $('#add_category').click(function(e) {
+            addCategory($container);
+
+            e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+            return false;
+            });
+
+            // Ajouté pour les images
+            $('#add_image').click(function(e) {
+            addImage($images);
+
+            e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+            return false;
+            });
+
+            // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
+            if (index == 0) {
+            addCategory($container);
+            } else {
+            // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
+            $container.children('div').each(function() {
+                addDeleteLink($(this));
+                });
+            }
+
+            // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un
+            if (indexImages == 0) {
+            addImage($images);
+            } else {
+            // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
+            $images.children('div').each(function() {
+                addDeleteLink2($(this));
+                });
+            }
+
+            // La fonction qui ajoute un formulaire CategoryType
+            function addCategory($container) {
+            // Dans le contenu de l'attribut « data-prototype », on remplace :
+            // - le texte "__name__label__" qu'il contient par le label du champ
+            // - le texte "__name__" qu'il contient par le numéro du champ
+            var template = $container.attr('data-prototype')
+                .replace(/__name__label__/g, 'Catégorie n°' + (index+1))
+                .replace(/__name__/g,        index)
+            ;
+
+            // On crée un objet jquery qui contient ce template
+            var $prototype = $(template);
+
+            
+            // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+            addDeleteLink($prototype);
+
+            
+
+            // On ajoute le prototype modifié à la fin de la balise <div>
+            $container.append($prototype);
+
+            
+
+            // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+            index++;
+            }
+
+            // La fonction qui ajoute un formulaire ImageType
+            function addImage($images) {
+            // Dans le contenu de l'attribut « data-prototype », on remplace :
+            // - le texte "__name__label__" qu'il contient par le label du champ
+            // - le texte "__name__" qu'il contient par le numéro du champ
+            var templateImg = $images.attr('data-prototype')
+                .replace(/__name__label__/g, 'Image n°' + (indexImages+1))
+                .replace(/__name__/g,        indexImages)
+            ;
+
+            var $prototypeImg = $(templateImg);
+
+            addDeleteLink2($prototypeImg);
+
+            $images.append($prototypeImg);
+
+            indexImages++
+            }
+
+
+
+            // La fonction qui ajoute un lien de suppression d'une catégorie
+            function addDeleteLink($prototype) {
+            // Création du lien
+            var $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+
+            // Ajout du lien
+            $prototype.append($deleteLink);
+
+            // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
+            $deleteLink.click(function(e) {
+                $prototype.remove();
+
+                e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                return false;
+                });
+            }
+
+            // La fonction qui ajoute un lien de suppression d'une image
+            function addDeleteLink2($prototypeImg) {
+            // Création du lien
+            var $deleteLink2 = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+
+            // Ajout du lien
+            $prototypeImg.append($deleteLink2);
+
+            // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
+            $deleteLink2.click(function(e) {
+                $prototypeImg.remove();
+
+                e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+                return false;
+                });
+            }
+        });
+    </script>
+{% endblock %}
