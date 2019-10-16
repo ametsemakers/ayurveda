@@ -17,7 +17,7 @@ class CoreController extends AbstractController
     public function indexAction()
     {
         $repository = $this->getDoctrine()->getManager()->getRepository('AMAdminBundle:Article');
-        /*$articles = $repository->findAll();*/
+        
         $blogPost = $repository->getMostRecentBlogPost();
 
         return $this->render('@AMCore/Default/homepage.html.twig', [
@@ -51,21 +51,6 @@ class CoreController extends AbstractController
      */
     public function contactAction(Request $request)
     {
-        //$form = $this->get('form.factory')->create(ContactType::class);
-
-        //$formHandler = new ContactHandler($form, $request, $this->get('mailer'));
-
-        //$process = $formHandler->process($form);
-
-        //if ($process)
-        //{
-        //    $session = $request->getSession();
-        //    $session->getFlashBag()->add('notice', 'Merci de m\'avoir contacté, je répondrai dans les plus brefs délails.');
-        //}
-        //else {
-        //    $session = $request->getSession();
-        //    $session->getFlashBag()->add('notice', 'No cigar...');
-        //}
 
         $form = $this->createForm(ContactType::class);
 

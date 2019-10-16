@@ -74,21 +74,7 @@ class AdminController extends AbstractController
      */
     public function addAction(Request $request,UserInterface $user)
     {
-        // On récupère le service
-        // $antispam = $this->container->get('am_admin.antispam');
-
-        // Je pars du principe que $text contient le texte d'un message quelconque
-        // $text = '...';
-        // if ($antispam->isSpam($text)) {
-        //     throw new \Exception('Votre message a été détecté comme spam !');
-        // }
-    
-        // Ici le message n'est pas un spam
-
-        //if (!$this->get('security.authorization_checker')->isGranted('ROLE_AUTEUR')) {
-        //    throw new AccessDeniedException('Accès limité aux auteurs.');
-        //}
-
+        
         $article = new Article();
         $author = $this->getUser();
         $article->setAuthor($author);

@@ -53,12 +53,8 @@ class AdminController extends AbstractController
     public function viewAction($id)
     {
         $repository = $this->getDoctrine()->getManager()->getRepository('AMAdminBundle:Article');
-        //$article = $repository->find($id);
-        $article = $repository->getArticleDetail($id);
         
-
-        //$repositoryPosition = $this->getDoctrine()->getManager()->getRepository('AMAdminBundle:Position');
-        //$position = $repositoryPosition->findAll();
+        $article = $repository->getArticleDetail($id);
 
         if (null === $article) {
             throw new NotFoundHttpException("L'article d'id ".$id." n'existe pas.");
@@ -74,20 +70,7 @@ class AdminController extends AbstractController
      */
     public function addAction(Request $request,UserInterface $user)
     {
-        // On récupère le service
-        // $antispam = $this->container->get('am_admin.antispam');
-
-        // Je pars du principe que $text contient le texte d'un message quelconque
-        // $text = '...';
-        // if ($antispam->isSpam($text)) {
-        //     throw new \Exception('Votre message a été détecté comme spam !');
-        // }
-    
-        // Ici le message n'est pas un spam
-
-        //if (!$this->get('security.authorization_checker')->isGranted('ROLE_AUTEUR')) {
-        //    throw new AccessDeniedException('Accès limité aux auteurs.');
-        //}
+        
 
         $article = new Article();
         $author = $this->getUser();
